@@ -18,11 +18,7 @@ while muvelet not in {"+", "-", "*", "/"}:
        print("Rossz műveleti jel!")
        muvelet = input("Milyen művelet legyen (+, -, *, /)?: ")
 
-szam2 = input("Kérem a második számot: ")
-while not szam2.isnumeric():
-    print("Rossz érték!")
-    szam2 = input("Kérem a második számot: ")
-szam2 = int(szam2)
+szam2 = adatkeres()
 
 eredmeny =0
 if muvelet == "+":
