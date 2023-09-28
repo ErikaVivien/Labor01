@@ -1,12 +1,18 @@
 # szamologep
 
-print("Számológép")
 
-szam1 = input("Kérem az első számot: ")
-while not szam1.isnumeric():
-    print("Rossz érték!")
-    szam1 = input("Kérem az első számot: ")
-szam1 = int(szam1)
+
+def adatkeres():
+    szam = input("Kérem az első számot: ")
+    while not szam.isnumeric():
+        print("Rossz érték!")
+        szam = input("Kérem az első számot: ")
+    szam = int(szam)
+    return szam
+
+print("Számológép")
+szam1 = adatkeres()
+
 muvelet = input("Milyen művelet legyen (+, -, *, /)?: ")
 while muvelet not in {"+", "-", "*", "/"}:
        print("Rossz műveleti jel!")
