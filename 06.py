@@ -14,7 +14,7 @@ def regisztracio():
             break
 
     if sikeres:
-        with open("jelszo.txt", "w", encoding="utf-8") as fajl:
+        with open("jelszo.txt", "a", encoding="utf-8") as fajl:
             fajl.write(felhasznalo_email + ";" + felhasznalo_jelszava + "\n")
     return sikeres
 
