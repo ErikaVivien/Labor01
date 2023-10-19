@@ -6,7 +6,7 @@ def regisztracio():
     felhasznalo_email = felhasznalonev()
     felhasznalo_jelszava = jelszo_bekerese()
     i = 1
-    while not jelszo_ellenorzese(felhasznalo_jelszava):
+    while not jelszo_ellenorzese(felhasznalo_jelszava, "kérem a jelszót! "):
         print("Nem egyezik a két jelszó!!!")
         i += 1
         if i > 3:
@@ -56,28 +56,54 @@ def jelszo_bekerese():
         if rossz_jelszo == True:
             felhasznalo_jelszava = input("Nem megfelelő a jelszó!\nKérek egy jelszót! 1,a,B, min. 8 karakter): ")
         else:
-            rossz_jelszo =False
+            rossz_jelszo = False
     return felhasznalo_jelszava
 
 
-def jelszo_ellenorzese(felhasznalo_jelszava):
-    jelszo2 = input("Kérem ismételje meg a jelszót!: ")
+def jelszo_ellenorzese(felhasznalo_jelszava, uzenet):
+    jelszo2 = input(uzenet)
     if jelszo2 == felhasznalo_jelszava:
         ok_jelszo = True
     else:
         ok_jelszo = False
     return ok_jelszo
 
+def felhasznalo_ellenorzese(felhasznalo):
+    jelszo = ""
+    with open("jelszo.txt", "r", encoding="utf-8") as fajl:
+        for sor in fajl:
+            lista = sor.strip()
+            user = lista.split(";")
+            if user[0] == felhasznalo:
+                jelszo = user[1]
+    return jelszo
+
 
 def beleptetes():
-    pass
-
+    ok_regisztracio = True
+    jelszo = felhasznalo_ellenorzese(felhasznalonev())
+    if jelszo== "":
+        print("Nincs ilyen felhasználó, kérem regisztráljon!")
+        ok_regisztracio = False
+    i = 1
+    while jelszo != "":
+        if jelszo_ellenorzese(jelszo, "Kérem a jelszót: "):
+            break
+        i += 1
+        if i > 3:
+            print("Nem megfelelő a jelszó!")
+            ok_regisztracio = False
+            break
+    return ok_regisztracio
 
 # innen indul a program
-if regisztracio():
-
-    beleptetes()
-else:
-    print("A sikertelen regisztráció miatt nem történt beléptetés")
+if __name__ == "__main__":
+    if regisztracio():
+       if beleptetes():
+           print("Üdv a fedélzeten!")
+       else:
+           print("Nem sikerült belépnie!")
+    else:
+        print("A sikertelen regisztráció miatt nem történt beléptetés")
 
 
