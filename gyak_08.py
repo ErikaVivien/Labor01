@@ -40,17 +40,21 @@ def regisztracio_ablak():
     def jelszo_gen_gomb_kezelese():
         pw = gyak_09.Jelszo()
         pw.jelszo_generalasa(10, True, True, True)
+
         print(pw.jelszo)
 
     regisztracio = Tk()
     regisztracio.title("Regisztráció")
 
     reg_felh_cimke = Label(regisztracio, text="Felhasználónév:")
-    reg_jelszo_cimke = Label(regisztracio, text="Jelszó:")
+
+
+    reg_jelszo_cimke = Label(regisztracio, text="Jelszó:" )
     reg_jelszo2_cimke = Label(regisztracio, text="Jelszó ismét:")
 
     reg_felh = Entry(regisztracio, width=30)
-    reg_jelszo = Entry(regisztracio, width=20)
+    jsz= ""
+    reg_jelszo = Entry(regisztracio, textvariable=jsz, width=20)
     reg_jelszo2 = Entry(regisztracio, width=20)
 
     gomb_ok = Button(regisztracio, text="OK", command=ok_gomb_kezelese)
